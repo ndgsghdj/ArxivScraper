@@ -20,7 +20,7 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 def embed():
     print("start")
-    pdf_folder_path = "/Users/linhouchengethanstu/ComputingCoursework2024/papers/pdf/0704"
+    pdf_folder_path = "./papers/pdf/0704"
     documents = []
     for file in os.listdir(pdf_folder_path):
         if file.endswith('.pdf'):
