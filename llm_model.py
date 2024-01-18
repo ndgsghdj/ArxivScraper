@@ -23,7 +23,7 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 def embed():
     print("start")
-    pdf_folder_path = "./papers/pdf/0704"
+    pdf_folder_path = "./papers/test_folders"
     documents = []
     for file in os.listdir(pdf_folder_path):
         if file.endswith('.pdf'):
@@ -39,7 +39,7 @@ def embed():
         print("Collection already exists")
     vectordb = Chroma.from_documents(
         documents=chunked_documents,
-        embedding=OpenAIEmbeddings(openai_api_key=openai_api_key)
+        embedding=OpenAIEmbeddings(openai_api_key=openai_api_key,persist_directory="./vector_db")
     )
     print("end")
     return vectordb
