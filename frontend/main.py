@@ -5,24 +5,21 @@ fm.Theme.set_theme(theme="blue")
 
 # Your main method with all your components
 def main(page: ft.Page):
-    page.bgcolor = fm.Theme.bgcolor
+    page.title = "PDF reader"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
+    def btn_click(e):
+        if not txt_name.value:
+            txt_name.error_text = "Please Enter PDF file needed"
+            page.update()
+        else:
+            PDF = txt_name.value
+            page.clean()
 
-    def show_notification(e):
-        badge.notification += 1
-        badge.add_notification(badge.notification)
+    txt_name = ft.TextField(label="PDF Link")
 
-    btn = ft.ElevatedButton(on_click=lambda e: show_notification(e))
-
-    badge = fm.NotificationBadge(title="Hello!", size="md", notification=0)
-
-    page.add(badge)
-    page.add(btn)
-
-    page.update()
+    page.add(txt_name, ft.ElevatedButton("Enter", on_click=btn_click))
 
 
-if __name__ == "__main__":
-   ft.app(target=main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)

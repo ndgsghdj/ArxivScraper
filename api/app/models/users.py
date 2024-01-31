@@ -1,14 +1,11 @@
-import uuid
-import json
 from datetime import datetime, time
 from typing import List, Optional
 from pydantic import BaseModel
 from pydantic.networks import AnyUrl, HttpUrl
-from pydantic.types import T, UUID4, constr
-from pydantic.typing import NONE_TYPES
+from pydantic.types import UUID4, constr
 
 class User(BaseModel):
-    username: Optional[str] = ""
+    username: constr(strip_whitespace=True, min_length=1, max_length=100)
     email: constr(strip_whitespace=True, min_length=1, max_length=100)
     password: constr(min_length=8, max_length=255)
     created_at: Optional[datetime] = datetime.now()
@@ -28,9 +25,11 @@ class TokenData(BaseModel):
     email: Optional[str] = None
 
 class UserSignUp(BaseModel):
+    username: constr(strip_whitespace=True, min_length=1, max_length=255)
     email: constr(strip_whitespace=True, min_length=1, max_length=100)
     password: constr(min_length=8, max_length=255)
 
 class UserLogin(BaseModel):
+    username: constr(strip_whitespace=True, min_length=1, max_length=255)
     email: constr(strip_whitespace=True, min_length=1, max_length=100)
     password: constr(min_length=8, max_length=255)
