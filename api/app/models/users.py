@@ -8,6 +8,7 @@ class User(BaseModel):
     username: constr(strip_whitespace=True, min_length=1, max_length=100)
     email: constr(strip_whitespace=True, min_length=1, max_length=100)
     password: constr(min_length=8, max_length=255)
+    is_active: Optional[bool] = True
     created_at: Optional[datetime] = datetime.now()
     
     def __str__(self):
@@ -22,7 +23,7 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    email: Optional[str] = None
+    username: Optional[str] = None
 
 class UserSignUp(BaseModel):
     username: constr(strip_whitespace=True, min_length=1, max_length=255)

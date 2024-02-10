@@ -15,7 +15,7 @@ class UserManager:
     def create_user(self, model):
         doc = db.collection(self.coll).document(str(model.username)).get()
         if doc.exists:
-            print(f"Duplicate Key Found. {doc.get('email')}")
+            print(f"Duplicate Key Found. {doc.get('username')}")
             return False
 
         doc = self.db.collection(self.coll).document(str(model.username)).set(model.dict())
@@ -26,7 +26,7 @@ class UserManager:
     def get_user(self, document):
         doc = db.collection(self.coll).document(document).get()
         if doc.exists:
-            print(f"Duplicate Key Found {doc.get('email')}")
+            print(f"Duplicate Key Found {doc.get('username')}")
             return doc.to_dict()
         else:
             return None
@@ -87,15 +87,15 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.encode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("sub")
-        if email is None:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
             raise credentials_exception
-        token_data = TokenData(email=email)
+        token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = get_user(email=token_data.email)
-    if user is None:
+    user = get_user(username=token_data.username)
+    if user is None:    
         raise credentials_exception
     return user
 
