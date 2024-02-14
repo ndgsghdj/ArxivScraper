@@ -21,7 +21,11 @@ async def signup(signup: UserSignUp):
     if u:
         return signup
     else:
-        return {"message": "failed"}
+        raise HTTPException(
+            status_code=400,
+            detail="Username already exists",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
 
 @router.post("/token", response_model=Token)
