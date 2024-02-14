@@ -10,9 +10,9 @@ from app.handlers.users import (
 )
 from app.handlers.users import get_password_hash
 
-router = APIRouter()
+user_router = APIRouter()
 
-@router.post("/signup/")
+@user_router.post("/signup/")
 async def signup(signup: UserSignUp):
     user = UserManager()
     user_data = User(**signup.model_dump())
@@ -28,7 +28,7 @@ async def signup(signup: UserSignUp):
         )
 
 
-@router.post("/token", response_model=Token)
+@user_router.post("/token", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(form_data.username, form_data.password)
     if not user:
@@ -44,6 +44,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/users/me/", response_model=User)
+@user_router.get("/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
