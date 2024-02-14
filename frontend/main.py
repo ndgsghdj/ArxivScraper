@@ -3,6 +3,7 @@ import flet_material as fm
 from routing.ExtendedRouting import ExtendedRouting, ExtendedPath
 from views.login.LoginView import LoginView
 from views.sign_up.SignUpView import SignUpView
+from views.home.HomeView import HomeView
 
 fm.Theme.set_theme(theme="blue")
 
@@ -25,12 +26,7 @@ def main(page: ft.Page):
         ExtendedPath(
             url="/",
             clear=True,
-            view=lambda page, params, basket: ft.View(
-                page,
-                controls=[
-                    ft.Text("This Is Index View")
-                ]
-            ),
+            view=HomeView,
             protected=True
         )
     ]
