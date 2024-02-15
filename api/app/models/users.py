@@ -1,5 +1,5 @@
 from datetime import datetime, time
-from typing import List, Optional
+from typing import Optional, Annotated
 from pydantic import BaseModel
 from pydantic.networks import AnyUrl, HttpUrl
 from pydantic.types import UUID4, constr

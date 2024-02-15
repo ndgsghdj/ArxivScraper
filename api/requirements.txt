@@ -7,5 +7,6 @@ python-jose
 passlib
 python-multipart
 bcrypt
-openai
+openai==1.7.1
 langchain
+lxml

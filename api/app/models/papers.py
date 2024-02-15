@@ -2,11 +2,11 @@ from pydantic import BaseModel, HttpUrl, validator
 from datetime import datetime
 
 class ArxivURL(BaseModel):
-    url: HttpUrl
+    url: str
 
     @classmethod
     def validate_url(cls, url):
-        if "arxiv.org/html/" not in url:
+        if "arxiv.org/html/" not in str(url):
             raise ValueError("Invalid arXiv html URL. It should contain 'arxiv.org/html/'")
         return url
 
