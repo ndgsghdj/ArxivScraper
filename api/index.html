@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer with Comments</title>
+    <style>
+        /* Styling for the container */
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Styling for the PDF viewer left side */
+        .pdf-viewer {
+            flex: 1;
+            height: 100vh;
+        }
+
+        /* Styling for the comments section so your right side */
+        .comments {
+            flex: 1;
+            height: 100vh;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pdf-viewer">
+            <!-- PDF viewer -->
+            <embed id="pdf-viewer" width="100%" height="100%" src="" type="application/pdf">
+        </div>
+        <div class="comments">
+            <!-- Commenst -->
+            <h2>Comments</h2>
+            <ul id="comment-list"></ul>
+        </div>
+    </div>
+    <script>
+        // JS in here
+        const inputFile = document.getElementById('input-file');
+
+        inputFile.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload/', {
+                method: 'POST',
+                body: formData,
+            }).then(response => response.json())
+            .then(data => {
+                const pdfViewer = document.getElementById('pdf-viewer');
+                pdfViewer.setAttribute('src', `/pdf/${data.filename}`);
+            });
+        });
+    </script>
+</body>
+</html>
