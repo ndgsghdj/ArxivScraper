@@ -6,7 +6,7 @@ class Papers(requests.Session):
         super().__init__()
     
     def get_papers(self):
-        url = "http://localhost:8000/api/user/users/me"
+        url = "http://localhost:8000/api/llm/"
         headers = {
             "Authorization": f"Bearer {self.token}"
         }
