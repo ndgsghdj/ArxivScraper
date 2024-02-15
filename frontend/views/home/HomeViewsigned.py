@@ -1,7 +1,8 @@
 from flet import *
 from flet_contrib.vertical_splitter import VerticalSplitter, FixedPane
+from flet_route import Basket, Params
 
-def HomeViewsigned(page: Page):
+def HomeViewsigned(page: Page, params: Params, basket: Basket):
     con_left = Container(
         bgcolor="blue200",
         content=Column([
@@ -47,6 +48,10 @@ def HomeViewsigned(page: Page):
         fixed_pane=FixedPane.LEFT
     )
 
-    page.add(my_point)
-
-app(main, view=AppView.WEB_BROWSER)
+    return View(
+        "/",
+        controls=[
+            my_point
+        ]
+    
+    )

@@ -3,7 +3,7 @@ import flet_material as fm
 from routing.ExtendedRouting import ExtendedRouting, ExtendedPath
 from views.login.LoginView import LoginView
 from views.sign_up.SignUpView import SignUpView
-from views.home.HomeView import HomeView
+from views.home.HomeViewsigned import HomeViewsigned
 
 fm.Theme.set_theme(theme="blue")
 
@@ -26,9 +26,9 @@ def main(page: ft.Page):
         ExtendedPath(
             url="/",
             clear=True,
-            view=HomeView,
+            view=HomeViewsigned,
             protected=True
-        )
+        ),
     ]
     ExtendedRouting(
         page=page,
