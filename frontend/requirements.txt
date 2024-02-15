@@ -2,3 +2,4 @@ flet
 flet-material
 flet_route
 flet-contrib
+html2text

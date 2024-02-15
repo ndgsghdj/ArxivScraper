@@ -1,5 +1,6 @@
 from pydantic import BaseModel, HttpUrl, validator
 from datetime import datetime
+from uuid import uuid4
 
 class ArxivURL(BaseModel):
     url: str
@@ -23,10 +24,11 @@ class ArxivURL(BaseModel):
         return v
 
 class Paper(BaseModel):
-    paper_id: int
+    paper_id: str = str(uuid4())
     paper_url: ArxivURL
     paper_name: str
-    paper_description: str
+    paper_html: str = ""
+    paper_keywords: str
     created_at: datetime = datetime.now()
     
     def __str__(self):

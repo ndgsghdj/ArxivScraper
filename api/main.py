@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.routes.user import user_router
 from app.routes.llm import llm_router
+from app.routes.papers import papers_router
 
 from app.models.users import User
 from app.handlers.users import get_password_hash, UserManager
@@ -24,6 +25,7 @@ def create_default_user():
 
 app.include_router(user_router, prefix="/api/user", tags=["users"])
 app.include_router(llm_router, prefix="/api/llm", tags=["papers"])
+app.include_router(papers_router, prefix="/api/papers", tags=["papers"])
 # Serve static files 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

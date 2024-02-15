@@ -1,32 +1,34 @@
 from fastapi import APIRouter, UploadFile, File
 from app.models.papers import ArxivURL
+from app.models.llm import Query
 from app.handlers.llm import query_llm
 from urllib.request import urlopen
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import shutil
 import os
-import openai
 from dotenv import load_dotenv
 
-load_dotenv()
 llm_router = APIRouter()
 
 # Directory to store uploaded files
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-# Initialize OpenAI API
-openai_api_key = os.getenv("../OPENAI_API_KEY")
-
+# Post endpoint to accept URL input
 @llm_router.post("/scrape_paper/")
-def scrape_paper_html(url: ArxivURL):
+async def scrape_paper_html(url: ArxivURL):
     url.prepend_http(url.url)
     url.validate_url(url.url)
     paper = urlopen(url.url, timeout=10)
     html_bytes = paper.read()
     html = html_bytes.decode("utf-8")
     return {"html": html}
+
+@llm_router.post("/query/")
+async def query_llm_endpoint(query: Query):
+    response = query_llm(query.query)
+    return {"response": response}
 
 # Upload endpoint to accept PDF file uploads
 @llm_router.post("/upload/")

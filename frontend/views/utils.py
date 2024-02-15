@@ -1,6 +1,7 @@
 from flet import Page, TextField
 import flet_material as fm
 from typing import List
+import html2text
 
 class WrongCreds:
     def __init__(self, page: Page, inputs: List[TextField], error_strings: List[str]) -> None:
@@ -18,4 +19,6 @@ class WrongCreds:
             input.error_text = error_string
             input.on_focus = self.on_focus_input
         self.page.update()
-    
+
+def get_text_from_html(html: str) -> str:
+    return html2text.html2text(html)
