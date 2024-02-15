@@ -39,7 +39,7 @@ def listify_llm_response(response):
 #query llm method based on query_text
 def query_llm(query_text):
     messages = [
-        {"role": "system", "content": """In the following text, provide quotes ONLY FOUND IN THE TEXT containing physics phrases and keywords that are not commonly encountered in everyday conversation and text. For each quoted phrase, explain its meaning. If the explanation contains numerical numbers, use the words. For example, 1 should be one. 
+        {"role": "system", "content": ""In the following text, provide quotes ONLY FOUND IN THE TEXT containing physics phrases and keywords that are not commonly encountered in everyday conversation and text. For each quoted phrase, explain its meaning in laymen terms. If the explanation contains numerical numbers, use the words. For example, 1 should be one. 
     another example: if query_text = "The car going around in a circle experiences centripetal force, which is equals to the frictional force acting on the car"
 
     the output would be: 
