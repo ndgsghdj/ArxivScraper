@@ -3,7 +3,6 @@ import openai
 
 app = FastAPI()
 
-# Initialize OpenAI API
 openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 def listify_llm_response(response):
