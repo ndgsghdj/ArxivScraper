@@ -1,5 +1,3 @@
-[Demo of API]
-
 # Dependencies
 It is recommended that you create a virtual environment for the dependencies in this project.
 
