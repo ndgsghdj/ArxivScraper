@@ -4,12 +4,15 @@ from flet_route import Basket, Params
 
 def HomeViewsigned(page: Page, params: Params, basket: Basket):
     con_left = Container(
-        bgcolor="blue200",
         content=Column([
             ListTile(
                 title=Text("PDFs"),
                 leading=Icon(name="PDF"),
-                on_click=lambda _: print("PDFs")
+            ),
+            Divider(),
+            ListTile(
+                title=Text("Upload new paper"),
+                leading=Icon(name="add"),
             ),
         ])
     )
@@ -23,7 +26,6 @@ def HomeViewsigned(page: Page, params: Params, basket: Basket):
                     ListTile(
                         title=Text("Information"),
                         leading=Icon(name="PDF"),
-                        on_click=lambda _: print("Information")
                     ),
                     ListTile(
                         title=Text("Log Out"),

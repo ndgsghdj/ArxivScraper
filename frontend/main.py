@@ -4,6 +4,7 @@ from routing.ExtendedRouting import ExtendedRouting, ExtendedPath
 from views.login.LoginView import LoginView
 from views.sign_up.SignUpView import SignUpView
 from views.home.HomeViewsigned import HomeViewsigned
+from views.new_page.PaperView import PaperView
 
 fm.Theme.set_theme(theme="blue")
 
@@ -29,6 +30,12 @@ def main(page: ft.Page):
             view=HomeViewsigned,
             protected=True
         ),
+        ExtendedPath(
+            url="/paper",
+            clear=True,
+            view=PaperView,
+            protected=False
+        )
     ]
     ExtendedRouting(
         page=page,
