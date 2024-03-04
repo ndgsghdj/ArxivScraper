@@ -18,7 +18,7 @@ from langchain.chains import LLMChain
 load_dotenv()
 
 #get API Key
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.environ.get("OPENAI_API_KEY")
 
 #call model
 llm = OpenAI(openai_api_key=openai_api_key,model_name='gpt-3.5-turbo-instruct',temperature=0,top_p=1,frequency_penalty=0,presence_penalty=0,best_of=1)
