@@ -26,22 +26,6 @@ load_dotenv()
 # Getting API Key from environment variables
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-# Call OpenAI model
-llm = OpenAI(openai_api_key=openai_api_key,model_name='gpt-3.5-turbo-instruct',temperature=0,top_p=1,frequency_penalty=0,presence_penalty=0,best_of=1)
-
-# Function to turn the OpenAI LLM response into a list to be used on the UI side
-def listify_llm_response(response):
-    ans = []
-    curr = ""
-    for i in range(len(response)):
-        if 3 < i < len(response) - 1 and response[i].isnumeric() and response[i+1]==".":
-            ans.append(curr)
-            curr = ""
-        if response[i] != "\n":
-            curr += response[i]
-    ans.append(curr)
-    return ans
-
 # Function to truncate text into chunks of a certain size
 def truncate_text(text, chunk_size):
     ans = []
@@ -63,6 +47,8 @@ def truncate_text(text, chunk_size):
         ans.append(curr)
     return ans
 
+
+
 # Function to query the OpenAI LLM based on query_text
 def query_llm(query_text):
     messages = [
@@ -82,3 +68,24 @@ def query_llm(query_text):
     )
     listified_response = listify_llm_response(response.choices[0].message.content.strip())
     return listified_response
+
+
+
+"""1. centripetal force:  a force that acts on a body moving in a circular path and is directed towards the centre around which the body is moving.
+    2. frictional force: Friction is the force that resists motion when the surface of one object comes in contact with the surface of another."""
+#
+# -> ["centripetal force:  a force that acts on a body moving in a circular path and is directed towards the centre around which the body is moving.", 
+# "frictional force: Friction is the force that resists motion when the surface of one object comes in contact with the surface of another."]
+
+# Function to turn the OpenAI LLM response into a list to be used on the UI side
+def listify_llm_response(response):
+    ans = []
+    curr = ""
+    for i in range(len(response)):
+        if 3 < i < len(response) - 1 and response[i].isnumeric() and response[i+1]==".":
+            ans.append(curr)
+            curr = ""
+        if response[i] != "\n":
+            curr += response[i]
+    ans.append(curr)
+    return ans
