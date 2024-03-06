@@ -1,7 +1,7 @@
 from fastapi import APIRouter, UploadFile, File
 from app.models.papers import ArxivURL
 from app.models.llm import Query
-from app.handlers.llm import query_llm
+from app.handlers.llm import query_llm, truncate_text
 from urllib.request import urlopen
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,7 +27,10 @@ async def scrape_paper_html(url: ArxivURL):
 
 @llm_router.post("/query/")
 async def query_llm_endpoint(query: Query):
-    response = query_llm(query.query)
+    q = query.query[4000:5000]
+    print(q)
+    response = query_llm(q)
+    print("Querying LLM...")
     return {"response": response}
 
 # Upload endpoint to accept PDF file uploads

@@ -24,7 +24,7 @@ class ArxivURL(BaseModel):
         return v
 
 class Paper(BaseModel):
-    paper_id: str = str(uuid4())
+    paper_id: str = ""
     paper_url: ArxivURL
     paper_name: str
     paper_html: str = ""

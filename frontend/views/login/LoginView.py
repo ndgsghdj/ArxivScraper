@@ -37,6 +37,7 @@ def LoginView(page: ft.Page, params: Params, basket: Basket):
     
         if login.status_code == 200:
             page.session.set("authenticated", True)
+            page.session.set("token", login.json()["access_token"])
             page.go("/")
             page.update()
         else:

@@ -1,7 +1,8 @@
 from flet import *
 from flet_contrib.vertical_splitter import VerticalSplitter, FixedPane
+from flet_route import Params, Basket
 
-def HomeView(page: Page):
+def HomeView(page: Page, params: Params, basket: Basket):
     # Left pane sign in 
     sign_in_button = ElevatedButton(text="Sign In", on_click=lambda e: print("Sign In"))
     log_in_button = ElevatedButton(text="Log In", on_click=lambda e: print("Log In"))
@@ -32,11 +33,14 @@ def HomeView(page: Page):
 
     centered_content = Container(
         content=my_point,
-        horizontal_alignment="center",
-        vertical_alignment="center"
+        alignment=alignment.center,
     )
 
-    page.add(centered_content)
+    return View(
+        "/",
+        controls=[
+            centered_content
+        ]
+    )
 
-app(main, view=AppView.WEB_BROWSER)
 
